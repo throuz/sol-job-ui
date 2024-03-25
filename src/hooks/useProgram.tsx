@@ -12,7 +12,7 @@ const useProgram = () => {
   const dataAccount = useMemo(() => web3.Keypair.generate(), []);
 
   const sign = async () => {
-    if (!isSigned && program && wallet) {
+    if (program && wallet) {
       await program.methods
         .new()
         .accounts({ dataAccount: dataAccount.publicKey })
@@ -23,7 +23,9 @@ const useProgram = () => {
   };
 
   const getLatestValue = async () => {
-    await sign();
+    if (!isSigned) {
+      await sign();
+    }
     if (program) {
       const value = await program.methods
         .get()
@@ -34,7 +36,9 @@ const useProgram = () => {
   };
 
   const flipValue = async () => {
-    await sign();
+    if (!isSigned) {
+      await sign();
+    }
     if (program) {
       await program.methods
         .flip()

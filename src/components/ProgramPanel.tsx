@@ -4,7 +4,14 @@ import useProgram from "../hooks/useProgram";
 import { metadata } from "../idl/solva.json";
 
 const ProgramPanel = () => {
-  const { wallet, dataAccount, createCase, activateCase } = useProgram();
+  const {
+    wallet,
+    balance,
+    dataAccount,
+    expertCreateCase,
+    expertCancelCase,
+    clientActivateCase,
+  } = useProgram();
 
   return (
     <Container>
@@ -14,22 +21,32 @@ const ProgramPanel = () => {
       >
         {metadata.address}
       </a>
-      <div>wallet publicKey: {wallet ? wallet.publicKey.toString() : "no wallet"}</div>
+      <div>
+        wallet publicKey: {wallet ? wallet.publicKey.toString() : "no wallet"}
+      </div>
+      <div>wallet balance: {balance ? balance : "no wallet"}</div>
       <div>dataAccount publicKey: {dataAccount.publicKey.toString()}</div>
       <WalletMultiButton />
       <button
         onClick={() => {
-          createCase();
+          expertCreateCase();
         }}
       >
-        createCase
+        expertCreateCase
       </button>
       <button
         onClick={() => {
-          activateCase();
+          expertCancelCase();
         }}
       >
-        activateCase
+        expertCancelCase
+      </button>
+      <button
+        onClick={() => {
+          clientActivateCase();
+        }}
+      >
+        clientActivateCase
       </button>
     </Container>
   );

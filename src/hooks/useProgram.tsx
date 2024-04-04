@@ -5,10 +5,12 @@ import * as anchor from "@coral-xyz/anchor";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import useAnchorProgram from "./useAnchorProgram";
+import useBalance from "./useBalance";
 
 const useProgram = () => {
   const program = useAnchorProgram();
   const wallet = useAnchorWallet();
+  const { balance, refreshBalance } = useBalance();
 
   const dataAccount = useMemo(() => web3.Keypair.generate(), []);
 
@@ -21,7 +23,7 @@ const useProgram = () => {
   const expertDepositLamports = new anchor.BN(expertDeposit * SOL);
   const clientDepositLamports = new anchor.BN(clientDeposit * SOL);
 
-  const createCase = async () => {
+  const expertCreateCase = async () => {
     try {
       if (program && wallet) {
         await program.methods
@@ -34,6 +36,7 @@ const useProgram = () => {
           .accounts({ dataAccount: dataAccount.publicKey })
           .signers([dataAccount])
           .rpc();
+        await refreshBalance();
         await Swal.fire("Create success!");
       }
     } catch (error) {
@@ -41,7 +44,26 @@ const useProgram = () => {
     }
   };
 
-  const activateCase = async () => {
+  const expertCancelCase = async () => {
+    try {
+      if (program && wallet) {
+        await program.methods
+          .expertCancelCase()
+          .accounts({
+            signer: wallet.publicKey,
+            dataAccount: dataAccount.publicKey,
+          })
+          .signers([])
+          .rpc();
+        await refreshBalance();
+        await Swal.fire("Cancel success!");
+      }
+    } catch (error) {
+      await Swal.fire(String(error));
+    }
+  };
+
+  const clientActivateCase = async () => {
     try {
       if (program && wallet) {
         await program.methods
@@ -52,14 +74,22 @@ const useProgram = () => {
           })
           .signers([])
           .rpc();
+        await refreshBalance();
+        await Swal.fire("Activate success!");
       }
-      await Swal.fire("Activate success!");
     } catch (error) {
       await Swal.fire(String(error));
     }
   };
 
-  return { wallet, dataAccount, createCase, activateCase };
+  return {
+    wallet,
+    balance,
+    dataAccount,
+    expertCreateCase,
+    expertCancelCase,
+    clientActivateCase,
+  };
 };
 
 export default useProgram;

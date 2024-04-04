@@ -1,34 +1,36 @@
 import styled from "styled-components";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import useProgram from "../hooks/useProgram";
+import { metadata } from "../idl/solva.json";
 
 const ProgramPanel = () => {
-  const { value, getLatestValue, flipValue } = useProgram();
+  const { wallet, dataAccount, createCase, activateCase } = useProgram();
 
   return (
     <Container>
       <a
-        href="https://explorer.solana.com/address/59iDUfJYQGN2SBVB6aAvD6vPgKVbu9kxntkKrZ1cWKo8?cluster=devnet"
+        href={`https://explorer.solana.com/address/${metadata.address}?cluster=devnet`}
         target="_blank"
       >
-        59iDUfJYQGN2SBVB6aAvD6vPgKVbu9kxntkKrZ1cWKo8
+        {metadata.address}
       </a>
+      <div>wallet publicKey: {wallet ? wallet.publicKey.toString() : "no wallet"}</div>
+      <div>dataAccount publicKey: {dataAccount.publicKey.toString()}</div>
       <WalletMultiButton />
       <button
         onClick={() => {
-          getLatestValue();
+          createCase();
         }}
       >
-        getLatestValue
+        createCase
       </button>
       <button
         onClick={() => {
-          flipValue();
+          activateCase();
         }}
       >
-        Flip
+        activateCase
       </button>
-      <div>value: {String(value)}</div>
     </Container>
   );
 };

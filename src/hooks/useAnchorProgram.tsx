@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { AnchorProvider, Idl, Program } from "@coral-xyz/anchor";
+import { AnchorProvider, Program } from "@coral-xyz/anchor";
 import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
-import idlFile from "../idl.json";
+import idlFile from "../idl/solva.json";
+import { Solva } from "../types/solva";
 
-const useAnchorProgram = (): Program<Idl> | null => {
+const useAnchorProgram = (): Program<Solva> | null => {
   const { connection } = useConnection();
   const wallet = useAnchorWallet();
-  const [program, setProgram] = useState<Program | null>(null);
+  const [program, setProgram] = useState<Program<Solva> | null>(null);
 
-  const idl = idlFile as Idl;
+  const idl = idlFile as Solva;
 
   useEffect(() => {
     if (wallet) {

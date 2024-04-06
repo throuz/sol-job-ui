@@ -11,6 +11,7 @@ const ProgramPanel = () => {
     expertCreateCase,
     expertCancelCase,
     clientActivateCase,
+    clientCompleteCase,
   } = useProgram();
 
   return (
@@ -47,6 +48,13 @@ const ProgramPanel = () => {
         }}
       >
         clientActivateCase
+      </button>
+      <button
+        onClick={() => {
+          clientCompleteCase();
+        }}
+      >
+        clientCompleteCase
       </button>
     </Container>
   );

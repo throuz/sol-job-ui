@@ -16,6 +16,16 @@ const useProgram = () => {
 
   const SOL = anchor.web3.LAMPORTS_PER_SOL;
 
+  const platformPubKey = new PublicKey(
+    "7VmTfGAKXbFCwjJsamN92X1kFobgPMdp9VbUT3LswGnW"
+  );
+  const expertPubKey = new PublicKey(
+    "7mpVpgw8XZjsDYZ1hL5uAS4HBc1REohRjWcWSLMdZw74"
+  );
+  const clientPubKey = new PublicKey(
+    "GZmPu1axjQ2KRii1ihoywHC38hCqJkX2TQ48cwHtvfTd"
+  );
+
   const caseAmount = 0.01;
   const expertDeposit = 0.003;
   const clientDeposit = 0.002;
@@ -28,8 +38,8 @@ const useProgram = () => {
       if (program && wallet) {
         await program.methods
           .new(
-            new PublicKey("7VmTfGAKXbFCwjJsamN92X1kFobgPMdp9VbUT3LswGnW"),
-            new PublicKey("GZmPu1axjQ2KRii1ihoywHC38hCqJkX2TQ48cwHtvfTd"),
+            platformPubKey,
+            clientPubKey,
             caseAmountLamports,
             expertDepositLamports,
             clientDepositLamports
@@ -83,6 +93,27 @@ const useProgram = () => {
     }
   };
 
+  const clientCompleteCase = async () => {
+    try {
+      if (program && wallet) {
+        await program.methods
+          .clientCompleteCase()
+          .accounts({
+            signer: wallet.publicKey,
+            DA: dataAccount.publicKey,
+            expert: expertPubKey,
+            platform: platformPubKey,
+            dataAccount: dataAccount.publicKey,
+          })
+          .rpc();
+        await refreshBalance();
+        await Swal.fire("Complete success!");
+      }
+    } catch (error) {
+      await Swal.fire(String(error));
+    }
+  };
+
   return {
     wallet,
     balance,
@@ -90,6 +121,7 @@ const useProgram = () => {
     expertCreateCase,
     expertCancelCase,
     clientActivateCase,
+    clientCompleteCase,
   };
 };
 

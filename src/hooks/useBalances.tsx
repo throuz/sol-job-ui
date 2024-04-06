@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import * as anchor from "@coral-xyz/anchor";
 import { useConnection } from "@solana/wallet-adapter-react";
 
@@ -25,7 +26,7 @@ const useBalances = ({
   const { connection } = useConnection();
   const [balances, setBalances] = useState<IBalances>();
 
-  const refreshBalance = useCallback(async () => {
+  const refreshBalance = async () => {
     const getBalance = async (publicKey: anchor.web3.PublicKey) => {
       const SOL = anchor.web3.LAMPORTS_PER_SOL;
       const balance = await connection.getBalance(publicKey);
@@ -41,17 +42,11 @@ const useBalances = ({
       expertAccountBalance,
       clientAccountBalance,
     });
-  }, [
-    clientPubKey,
-    connection,
-    dataAccountPubKey,
-    expertPubKey,
-    platformPubKey,
-  ]);
+  };
 
   useEffect(() => {
     refreshBalance();
-  }, [refreshBalance]);
+  }, []);
 
   return { balances, refreshBalance };
 };

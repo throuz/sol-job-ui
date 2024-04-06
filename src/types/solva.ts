@@ -12,6 +12,12 @@ export type Solva = {
           "isOptional": false
         },
         {
+          "name": "platform",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
           "name": "expert",
           "isMut": true,
           "isSigner": true,
@@ -25,10 +31,6 @@ export type Solva = {
         }
       ],
       "args": [
-        {
-          "name": "platformpubkey",
-          "type": "publicKey"
-        },
         {
           "name": "clientpubkey",
           "type": "publicKey"
@@ -82,6 +84,12 @@ export type Solva = {
         },
         {
           "name": "DA",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
+          "name": "platform",
           "isMut": true,
           "isSigner": false,
           "isOptional": false
@@ -228,6 +236,12 @@ export const IDL: Solva = {
           "isOptional": false
         },
         {
+          "name": "platform",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
           "name": "expert",
           "isMut": true,
           "isSigner": true,
@@ -241,10 +255,6 @@ export const IDL: Solva = {
         }
       ],
       "args": [
-        {
-          "name": "platformpubkey",
-          "type": "publicKey"
-        },
         {
           "name": "clientpubkey",
           "type": "publicKey"
@@ -298,6 +308,12 @@ export const IDL: Solva = {
         },
         {
           "name": "DA",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
+          "name": "platform",
           "isMut": true,
           "isSigner": false,
           "isOptional": false

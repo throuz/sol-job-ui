@@ -44,13 +44,15 @@ const useProgram = () => {
       if (program && wallet) {
         await program.methods
           .new(
-            platformPubKey,
             clientPubKey,
             caseAmountLamports,
             expertDepositLamports,
             clientDepositLamports
           )
-          .accounts({ dataAccount: dataAccount.publicKey })
+          .accounts({
+            platform: platformPubKey,
+            dataAccount: dataAccount.publicKey,
+          })
           .signers([dataAccount])
           .rpc();
         await refreshBalance();
@@ -87,6 +89,7 @@ const useProgram = () => {
           .clientActivateCase(clientDepositLamports)
           .accounts({
             DA: dataAccount.publicKey,
+            platform: platformPubKey,
             client: wallet.publicKey,
             dataAccount: dataAccount.publicKey,
           })

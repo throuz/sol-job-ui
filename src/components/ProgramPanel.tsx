@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import useProgram from "../hooks/useProgram";
-import { metadata } from "../idl/solva.json";
+import { IDL } from "../types/solva";
 
 const ProgramPanel = () => {
   const {
@@ -16,10 +16,10 @@ const ProgramPanel = () => {
   return (
     <Container>
       <a
-        href={`https://explorer.solana.com/address/${metadata.address}?cluster=devnet`}
+        href={`https://explorer.solana.com/address/${IDL.metadata.address}?cluster=devnet`}
         target="_blank"
       >
-        {metadata.address}
+        {IDL.metadata.address}
       </a>
       <div>
         wallet publicKey: {wallet ? wallet.publicKey.toString() : "no wallet"}

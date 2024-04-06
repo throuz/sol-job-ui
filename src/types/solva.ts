@@ -30,6 +30,10 @@ export type Solva = {
           "type": "publicKey"
         },
         {
+          "name": "clientpubkey",
+          "type": "publicKey"
+        },
+        {
           "name": "caseamountlamports",
           "type": "u64"
         },
@@ -57,6 +61,12 @@ export type Solva = {
           "isMut": true,
           "isSigner": true,
           "isOptional": false
+        },
+        {
+          "name": "DA",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
         }
       ],
       "args": []
@@ -72,6 +82,12 @@ export type Solva = {
         },
         {
           "name": "signer",
+          "isMut": true,
+          "isSigner": true,
+          "isOptional": false
+        },
+        {
+          "name": "DA",
           "isMut": true,
           "isSigner": false,
           "isOptional": false
@@ -104,6 +120,18 @@ export type Solva = {
           "isMut": true,
           "isSigner": true,
           "isOptional": false
+        },
+        {
+          "name": "DA",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
+          "name": "expert",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
         }
       ],
       "args": []
@@ -122,23 +150,17 @@ export type Solva = {
           "isMut": true,
           "isSigner": true,
           "isOptional": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "indemniteeRecieveCompensation",
-      "accounts": [
+        },
         {
-          "name": "dataAccount",
+          "name": "DA",
           "isMut": true,
           "isSigner": false,
           "isOptional": false
         },
         {
-          "name": "signer",
+          "name": "client",
           "isMut": true,
-          "isSigner": true,
+          "isSigner": false,
           "isOptional": false
         }
       ],
@@ -160,6 +182,24 @@ export type Solva = {
           "isOptional": false
         },
         {
+          "name": "DA",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
+          "name": "expert",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
+          "name": "platform",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false,
@@ -167,46 +207,10 @@ export type Solva = {
         }
       ],
       "args": []
-    },
-    {
-      "name": "expertGetIncome",
-      "accounts": [
-        {
-          "name": "dataAccount",
-          "isMut": true,
-          "isSigner": false,
-          "isOptional": false
-        },
-        {
-          "name": "signer",
-          "isMut": true,
-          "isSigner": true,
-          "isOptional": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "platformCloseCase",
-      "accounts": [
-        {
-          "name": "dataAccount",
-          "isMut": true,
-          "isSigner": false,
-          "isOptional": false
-        },
-        {
-          "name": "signer",
-          "isMut": true,
-          "isSigner": true,
-          "isOptional": false
-        }
-      ],
-      "args": []
     }
   ],
   "metadata": {
-    "address": "C5Va9W4xKoXrWFjAvMgToCQpHFTN9CcJXQTLFh7yk99C"
+    "address": "GuvvxMUBDziMyyB2fy7XoUy7cLE5mHQiBNwPzHHHDtSg"
   }
 };
 
@@ -242,6 +246,10 @@ export const IDL: Solva = {
           "type": "publicKey"
         },
         {
+          "name": "clientpubkey",
+          "type": "publicKey"
+        },
+        {
           "name": "caseamountlamports",
           "type": "u64"
         },
@@ -269,6 +277,12 @@ export const IDL: Solva = {
           "isMut": true,
           "isSigner": true,
           "isOptional": false
+        },
+        {
+          "name": "DA",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
         }
       ],
       "args": []
@@ -284,6 +298,12 @@ export const IDL: Solva = {
         },
         {
           "name": "signer",
+          "isMut": true,
+          "isSigner": true,
+          "isOptional": false
+        },
+        {
+          "name": "DA",
           "isMut": true,
           "isSigner": false,
           "isOptional": false
@@ -316,6 +336,18 @@ export const IDL: Solva = {
           "isMut": true,
           "isSigner": true,
           "isOptional": false
+        },
+        {
+          "name": "DA",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
+          "name": "expert",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
         }
       ],
       "args": []
@@ -334,23 +366,17 @@ export const IDL: Solva = {
           "isMut": true,
           "isSigner": true,
           "isOptional": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "indemniteeRecieveCompensation",
-      "accounts": [
+        },
         {
-          "name": "dataAccount",
+          "name": "DA",
           "isMut": true,
           "isSigner": false,
           "isOptional": false
         },
         {
-          "name": "signer",
+          "name": "client",
           "isMut": true,
-          "isSigner": true,
+          "isSigner": false,
           "isOptional": false
         }
       ],
@@ -372,6 +398,24 @@ export const IDL: Solva = {
           "isOptional": false
         },
         {
+          "name": "DA",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
+          "name": "expert",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
+          "name": "platform",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false,
@@ -379,45 +423,9 @@ export const IDL: Solva = {
         }
       ],
       "args": []
-    },
-    {
-      "name": "expertGetIncome",
-      "accounts": [
-        {
-          "name": "dataAccount",
-          "isMut": true,
-          "isSigner": false,
-          "isOptional": false
-        },
-        {
-          "name": "signer",
-          "isMut": true,
-          "isSigner": true,
-          "isOptional": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "platformCloseCase",
-      "accounts": [
-        {
-          "name": "dataAccount",
-          "isMut": true,
-          "isSigner": false,
-          "isOptional": false
-        },
-        {
-          "name": "signer",
-          "isMut": true,
-          "isSigner": true,
-          "isOptional": false
-        }
-      ],
-      "args": []
     }
   ],
   "metadata": {
-    "address": "C5Va9W4xKoXrWFjAvMgToCQpHFTN9CcJXQTLFh7yk99C"
+    "address": "GuvvxMUBDziMyyB2fy7XoUy7cLE5mHQiBNwPzHHHDtSg"
   }
 };

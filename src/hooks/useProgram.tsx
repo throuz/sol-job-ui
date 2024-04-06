@@ -29,6 +29,7 @@ const useProgram = () => {
         await program.methods
           .new(
             new PublicKey("7VmTfGAKXbFCwjJsamN92X1kFobgPMdp9VbUT3LswGnW"),
+            new PublicKey("GZmPu1axjQ2KRii1ihoywHC38hCqJkX2TQ48cwHtvfTd"),
             caseAmountLamports,
             expertDepositLamports,
             clientDepositLamports
@@ -52,8 +53,8 @@ const useProgram = () => {
           .accounts({
             signer: wallet.publicKey,
             dataAccount: dataAccount.publicKey,
+            DA: dataAccount.publicKey,
           })
-          .signers([])
           .rpc();
         await refreshBalance();
         await Swal.fire("Cancel success!");
@@ -71,8 +72,8 @@ const useProgram = () => {
           .accounts({
             signer: wallet.publicKey,
             dataAccount: dataAccount.publicKey,
+            DA: dataAccount.publicKey,
           })
-          .signers([])
           .rpc();
         await refreshBalance();
         await Swal.fire("Activate success!");

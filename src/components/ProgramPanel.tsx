@@ -6,7 +6,7 @@ import { IDL } from "../types/solva";
 const ProgramPanel = () => {
   const {
     wallet,
-    balance,
+    balances,
     dataAccount,
     expertCreateCase,
     expertCancelCase,
@@ -27,8 +27,11 @@ const ProgramPanel = () => {
       <div>
         wallet publicKey: {wallet ? wallet.publicKey.toString() : "no wallet"}
       </div>
-      <div>wallet balance: {balance ? balance : "no wallet"}</div>
       <div>dataAccount publicKey: {dataAccount.publicKey.toString()}</div>
+      <div>dataAccount balance: {balances?.dataAccountBalance}</div>
+      <div>platform balance: {balances?.platformAccountBalance}</div>
+      <div>expert balance: {balances?.expertAccountBalance}</div>
+      <div>client balance: {balances?.clientAccountBalance}</div>
       <WalletMultiButton />
       <button
         onClick={() => {

@@ -5,16 +5,15 @@ import * as anchor from "@coral-xyz/anchor";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import useAnchorProgram from "./useAnchorProgram";
-import useBalance from "./useBalance";
+import useBalances from "./useBalances";
 
 const useProgram = () => {
   const program = useAnchorProgram();
   const wallet = useAnchorWallet();
-  const { balance, refreshBalance } = useBalance();
-
-  const dataAccount = useMemo(() => web3.Keypair.generate(), []);
 
   const SOL = anchor.web3.LAMPORTS_PER_SOL;
+
+  const dataAccount = useMemo(() => web3.Keypair.generate(), []);
 
   const platformPubKey = new PublicKey(
     "7VmTfGAKXbFCwjJsamN92X1kFobgPMdp9VbUT3LswGnW"
@@ -25,6 +24,13 @@ const useProgram = () => {
   const clientPubKey = new PublicKey(
     "GZmPu1axjQ2KRii1ihoywHC38hCqJkX2TQ48cwHtvfTd"
   );
+
+  const { balances, refreshBalance } = useBalances({
+    dataAccountPubKey: dataAccount.publicKey,
+    platformPubKey,
+    expertPubKey,
+    clientPubKey,
+  });
 
   const caseAmount = 0.01;
   const expertDeposit = 0.003;
@@ -156,7 +162,7 @@ const useProgram = () => {
 
   return {
     wallet,
-    balance,
+    balances,
     dataAccount,
     expertCreateCase,
     expertCancelCase,

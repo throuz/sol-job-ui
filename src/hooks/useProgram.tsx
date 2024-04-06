@@ -61,9 +61,9 @@ const useProgram = () => {
         await program.methods
           .expertCancelCase()
           .accounts({
-            signer: wallet.publicKey,
-            dataAccount: dataAccount.publicKey,
             DA: dataAccount.publicKey,
+            expert: wallet.publicKey,
+            dataAccount: dataAccount.publicKey,
           })
           .rpc();
         await refreshBalance();
@@ -80,9 +80,9 @@ const useProgram = () => {
         await program.methods
           .clientActivateCase(clientDepositLamports)
           .accounts({
-            signer: wallet.publicKey,
-            dataAccount: dataAccount.publicKey,
             DA: dataAccount.publicKey,
+            client: wallet.publicKey,
+            dataAccount: dataAccount.publicKey,
           })
           .rpc();
         await refreshBalance();
@@ -99,10 +99,10 @@ const useProgram = () => {
         await program.methods
           .clientCompleteCase()
           .accounts({
-            signer: wallet.publicKey,
             DA: dataAccount.publicKey,
-            expert: expertPubKey,
             platform: platformPubKey,
+            expert: expertPubKey,
+            client: wallet.publicKey,
             dataAccount: dataAccount.publicKey,
           })
           .rpc();

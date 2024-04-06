@@ -11,6 +11,8 @@ const ProgramPanel = () => {
     expertCreateCase,
     expertCancelCase,
     clientActivateCase,
+    platformForceCloseCaseForExpert,
+    platformForceCloseCaseForClient,
     clientCompleteCase,
   } = useProgram();
 
@@ -48,6 +50,20 @@ const ProgramPanel = () => {
         }}
       >
         clientActivateCase
+      </button>
+      <button
+        onClick={() => {
+          platformForceCloseCaseForExpert();
+        }}
+      >
+        platformForceCloseCaseForExpert
+      </button>
+      <button
+        onClick={() => {
+          platformForceCloseCaseForClient();
+        }}
+      >
+        platformForceCloseCaseForClient
       </button>
       <button
         onClick={() => {

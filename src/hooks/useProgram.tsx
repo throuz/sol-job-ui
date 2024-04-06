@@ -93,6 +93,46 @@ const useProgram = () => {
     }
   };
 
+  const platformForceCloseCaseForExpert = async () => {
+    try {
+      if (program && wallet) {
+        await program.methods
+          .platformForceCloseCaseForExpert()
+          .accounts({
+            DA: dataAccount.publicKey,
+            platform: platformPubKey,
+            expert: expertPubKey,
+            dataAccount: dataAccount.publicKey,
+          })
+          .rpc();
+        await refreshBalance();
+        await Swal.fire("Complete success!");
+      }
+    } catch (error) {
+      await Swal.fire(String(error));
+    }
+  };
+
+  const platformForceCloseCaseForClient = async () => {
+    try {
+      if (program && wallet) {
+        await program.methods
+          .platformForceCloseCaseForClient()
+          .accounts({
+            DA: dataAccount.publicKey,
+            platform: platformPubKey,
+            client: clientPubKey,
+            dataAccount: dataAccount.publicKey,
+          })
+          .rpc();
+        await refreshBalance();
+        await Swal.fire("Complete success!");
+      }
+    } catch (error) {
+      await Swal.fire(String(error));
+    }
+  };
+
   const clientCompleteCase = async () => {
     try {
       if (program && wallet) {
@@ -121,6 +161,8 @@ const useProgram = () => {
     expertCreateCase,
     expertCancelCase,
     clientActivateCase,
+    platformForceCloseCaseForExpert,
+    platformForceCloseCaseForClient,
     clientCompleteCase,
   };
 };

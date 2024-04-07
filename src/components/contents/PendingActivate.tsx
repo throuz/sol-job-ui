@@ -29,8 +29,8 @@ const PendingActivate = () => {
         <div>
           <div>Expert: {expertAddress.slice(0, 12)}...</div>
           <div>Case Amount: {caseAmount} SOL</div>
-          <div>Expert Deposit: {expertDeposit} SOL</div>
-          <div>Client Deposit: {clientDeposit} SOL</div>
+          <div>Expert Collateral: {expertDeposit} SOL</div>
+          <div>Client Collateral: {clientDeposit} SOL</div>
         </div>
         <button
           disabled={isSubmitting}

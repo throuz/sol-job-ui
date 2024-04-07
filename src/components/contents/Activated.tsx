@@ -36,8 +36,9 @@ const Activated = () => {
           disabled={isSubmitting}
           onClick={async () => {
             try {
+              setIsSubmitting(true);
               await clientCompleteCase();
-              globalDispatch({ type: "status", value: EStatus.Activated });
+              globalDispatch({ type: "status", value: EStatus.Completed });
               await Swal.fire("Complete success!");
               setIsSubmitting(false);
             } catch (error) {

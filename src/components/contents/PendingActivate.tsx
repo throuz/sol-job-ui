@@ -36,6 +36,7 @@ const PendingActivate = () => {
           disabled={isSubmitting}
           onClick={async () => {
             try {
+              setIsSubmitting(true);
               await clientActivateCase();
               globalDispatch({ type: "status", value: EStatus.Activated });
               await Swal.fire("Activate success!");

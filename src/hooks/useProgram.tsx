@@ -27,10 +27,14 @@ const useProgram = () => {
 
   const SOL = anchor.web3.LAMPORTS_PER_SOL;
 
-  const dataAccountPubKey = new PublicKey(dataAccountAddress);
-  const platformPubKey = new PublicKey(platformAddress);
-  const expertPubKey = new PublicKey(expertAddress);
-  const clientPubKey = new PublicKey(clientAddress);
+  const dataAccountPubKey = dataAccountAddress
+    ? new PublicKey(dataAccountAddress)
+    : undefined;
+  const platformPubKey = platformAddress
+    ? new PublicKey(platformAddress)
+    : undefined;
+  const expertPubKey = expertAddress ? new PublicKey(expertAddress) : undefined;
+  const clientPubKey = clientAddress ? new PublicKey(clientAddress) : undefined;
 
   const { balances, refreshBalance } = useBalances({
     dataAccountPubKey,

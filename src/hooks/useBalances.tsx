@@ -4,10 +4,10 @@ import * as anchor from "@coral-xyz/anchor";
 import { useConnection } from "@solana/wallet-adapter-react";
 
 interface IUseBalancesProps {
-  dataAccountPubKey: anchor.web3.PublicKey;
-  platformPubKey: anchor.web3.PublicKey;
-  expertPubKey: anchor.web3.PublicKey;
-  clientPubKey: anchor.web3.PublicKey;
+  dataAccountPubKey: anchor.web3.PublicKey | undefined;
+  platformPubKey: anchor.web3.PublicKey | undefined;
+  expertPubKey: anchor.web3.PublicKey | undefined;
+  clientPubKey: anchor.web3.PublicKey | undefined;
 }
 
 interface IBalances {
@@ -27,7 +27,10 @@ const useBalances = ({
   const [balances, setBalances] = useState<IBalances>();
 
   const refreshBalance = async () => {
-    const getBalance = async (publicKey: anchor.web3.PublicKey) => {
+    const getBalance = async (publicKey: anchor.web3.PublicKey | undefined) => {
+      if (publicKey === undefined) {
+        return 0;
+      }
       const SOL = anchor.web3.LAMPORTS_PER_SOL;
       const balance = await connection.getBalance(publicKey);
       return balance / SOL;

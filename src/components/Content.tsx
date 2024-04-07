@@ -1,5 +1,7 @@
 import { useGlobalContext } from "../context/hooks";
 import { EStatus } from "../context/types";
+import Activated from "./contents/Activated";
+import Completed from "./contents/Completed";
 import Connected from "./contents/Connected";
 import Created from "./contents/Created";
 import Nothing from "./contents/Nothing";
@@ -14,6 +16,8 @@ const Content = () => {
       {status === EStatus.Connected && <Connected />}
       {status === EStatus.Created && <Created />}
       {status === EStatus.PendingActivate && <PendingActivate />}
+      {status === EStatus.Activated && <Activated />}
+      {status === EStatus.Completed && <Completed />}
     </>
   );
 };

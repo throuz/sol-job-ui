@@ -9,17 +9,17 @@ import {
 import { EStatus } from "../../context/types";
 import useProgram from "../../hooks/useProgram";
 
-const PendingActivate = () => {
+const Activated = () => {
   const { expertAddress, caseAmount, expertDeposit, clientDeposit } =
     useGlobalContext();
   const globalDispatch = useGlobalDispatchContext();
-  const { clientActivateCase } = useProgram();
+  const { clientCompleteCase } = useProgram();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
     toast.dismiss();
     toast.clearWaitingQueue();
-    toast("Please activate case");
+    toast("Please complete case");
   }, []);
 
   return (
@@ -36,9 +36,9 @@ const PendingActivate = () => {
           disabled={isSubmitting}
           onClick={async () => {
             try {
-              await clientActivateCase();
+              await clientCompleteCase();
               globalDispatch({ type: "status", value: EStatus.Activated });
-              await Swal.fire("Activate success!");
+              await Swal.fire("Complete success!");
               setIsSubmitting(false);
             } catch (error) {
               await Swal.fire(String(error));
@@ -46,14 +46,14 @@ const PendingActivate = () => {
             }
           }}
         >
-          {isSubmitting ? "Submitting..." : "Activate"}
+          {isSubmitting ? "Submitting..." : "Complete"}
         </button>
       </CaseItem>
     </Container>
   );
 };
 
-export default PendingActivate;
+export default Activated;
 
 const Container = styled.div`
   padding: 20px;

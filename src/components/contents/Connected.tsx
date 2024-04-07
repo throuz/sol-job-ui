@@ -6,6 +6,7 @@ import { useGlobalDispatchContext } from "../../context/hooks";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { EStatus } from "../../context/types";
 import Swal from "sweetalert2";
+import { web3 } from "@coral-xyz/anchor";
 
 interface IValues {
   clientAddress: string;
@@ -75,14 +76,20 @@ const Connected = () => {
     try {
       setIsSubmitting(true);
       e.preventDefault();
-      // const params: IExpertCreateCaseValues = {
-      //   clientAddress: values.clientAddress,
-      //   caseAmount: Number(values.caseAmount),
-      //   expertDeposit: Number(values.expertDeposit),
-      //   clientDeposit: Number(values.clientDeposit),
-      // };
-      // await expertCreateCase(params);
+      const dataAccount = web3.Keypair.generate();
+      const params: IExpertCreateCaseValues = {
+        dataAccount,
+        clientAddress: values.clientAddress,
+        caseAmount: Number(values.caseAmount),
+        expertDeposit: Number(values.expertDeposit),
+        clientDeposit: Number(values.clientDeposit),
+      };
+      await expertCreateCase(params);
       globalDispatch({ type: "status", value: EStatus.Created });
+      globalDispatch({
+        type: "dataAccountAddress",
+        value: dataAccount.publicKey.toString(),
+      });
       globalDispatch({
         type: "expertAddress",
         value: wallet ? wallet.publicKey.toString() : "",

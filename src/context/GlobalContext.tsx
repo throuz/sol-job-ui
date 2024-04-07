@@ -16,6 +16,7 @@ export const GlobalDispatchContext = createContext<IGlobalDispatchContext>(
 
 const defaultState: IGlobalContext = {
   status: EStatus.Nothing,
+  dataAccountAddress: "",
   platformAddress: "7VmTfGAKXbFCwjJsamN92X1kFobgPMdp9VbUT3LswGnW",
   expertAddress: "",
   clientAddress: "",
@@ -30,6 +31,12 @@ const stateReducer = (state: IGlobalContext, action: IGlobalContextAction) => {
       return {
         ...state,
         status: action.value,
+      };
+    }
+    case "dataAccountAddress": {
+      return {
+        ...state,
+        dataAccountAddress: action.value,
       };
     }
     case "platformAddress": {

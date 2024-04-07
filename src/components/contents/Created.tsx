@@ -14,9 +14,6 @@ const Created = () => {
   const { clientAddress } = useGlobalContext();
   const globalDispatch = useGlobalDispatchContext();
 
-  const globalContext = useGlobalContext();
-  console.log(globalContext);
-
   useEffect(() => {
     toast.dismiss();
     toast.clearWaitingQueue();

@@ -11,6 +11,7 @@ export enum EStatus {
 
 export interface IGlobalContext {
   status: EStatus;
+  dataAccountAddress: string;
   platformAddress: string;
   expertAddress: string;
   clientAddress: string;
@@ -22,6 +23,11 @@ export interface IGlobalContext {
 interface IStatusAction {
   type: "status";
   value: EStatus;
+}
+
+interface IDataAccountAddressAction {
+  type: "dataAccountAddress";
+  value: string;
 }
 
 interface IPlatformAddressAction {
@@ -56,6 +62,7 @@ interface IClientDepositAction {
 
 export type IGlobalContextAction =
   | IStatusAction
+  | IDataAccountAddressAction
   | IPlatformAddressAction
   | IExpertAddressAction
   | IClientAddressAction

@@ -1,48 +1,46 @@
-import { useMemo } from "react";
 import { web3 } from "@coral-xyz/anchor";
 import * as anchor from "@coral-xyz/anchor";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import useAnchorProgram from "./useAnchorProgram";
 import useBalances from "./useBalances";
+import { useGlobalContext } from "../context/hooks";
 
 export interface IExpertCreateCaseValues {
+  dataAccount: web3.Keypair;
   clientAddress: string;
   caseAmount: number;
   expertDeposit: number;
   clientDeposit: number;
 }
 
-export interface IClientActivateCaseValues {
-  clientDeposit: number;
-}
-
 const useProgram = () => {
   const program = useAnchorProgram();
   const wallet = useAnchorWallet();
+  const {
+    dataAccountAddress,
+    platformAddress,
+    expertAddress,
+    clientAddress,
+    clientDeposit,
+  } = useGlobalContext();
 
   const SOL = anchor.web3.LAMPORTS_PER_SOL;
 
-  const dataAccount = useMemo(() => web3.Keypair.generate(), []);
-
-  const platformPubKey = new PublicKey(
-    "7VmTfGAKXbFCwjJsamN92X1kFobgPMdp9VbUT3LswGnW"
-  );
-  const expertPubKey = new PublicKey(
-    "7mpVpgw8XZjsDYZ1hL5uAS4HBc1REohRjWcWSLMdZw74"
-  );
-  const clientPubKey = new PublicKey(
-    "GZmPu1axjQ2KRii1ihoywHC38hCqJkX2TQ48cwHtvfTd"
-  );
+  const dataAccountPubKey = new PublicKey(dataAccountAddress);
+  const platformPubKey = new PublicKey(platformAddress);
+  const expertPubKey = new PublicKey(expertAddress);
+  const clientPubKey = new PublicKey(clientAddress);
 
   const { balances, refreshBalance } = useBalances({
-    dataAccountPubKey: dataAccount.publicKey,
+    dataAccountPubKey,
     platformPubKey,
     expertPubKey,
     clientPubKey,
   });
 
   const expertCreateCase = async ({
+    dataAccount,
     clientAddress,
     caseAmount,
     expertDeposit,
@@ -71,26 +69,24 @@ const useProgram = () => {
       await program.methods
         .expertCancelCase()
         .accounts({
-          DA: dataAccount.publicKey,
+          DA: dataAccountPubKey,
           expert: wallet.publicKey,
-          dataAccount: dataAccount.publicKey,
+          dataAccount: dataAccountPubKey,
         })
         .rpc();
       await refreshBalance();
     }
   };
 
-  const clientActivateCase = async ({
-    clientDeposit,
-  }: IClientActivateCaseValues) => {
+  const clientActivateCase = async () => {
     if (program && wallet) {
       await program.methods
         .clientActivateCase(new anchor.BN(clientDeposit * SOL))
         .accounts({
-          DA: dataAccount.publicKey,
+          DA: dataAccountPubKey,
           platform: platformPubKey,
           client: wallet.publicKey,
-          dataAccount: dataAccount.publicKey,
+          dataAccount: dataAccountPubKey,
         })
         .rpc();
       await refreshBalance();
@@ -102,10 +98,10 @@ const useProgram = () => {
       await program.methods
         .platformForceCloseCaseForExpert()
         .accounts({
-          DA: dataAccount.publicKey,
+          DA: dataAccountPubKey,
           platform: platformPubKey,
           expert: expertPubKey,
-          dataAccount: dataAccount.publicKey,
+          dataAccount: dataAccountPubKey,
         })
         .rpc();
       await refreshBalance();
@@ -117,10 +113,10 @@ const useProgram = () => {
       await program.methods
         .platformForceCloseCaseForClient()
         .accounts({
-          DA: dataAccount.publicKey,
+          DA: dataAccountPubKey,
           platform: platformPubKey,
           client: clientPubKey,
-          dataAccount: dataAccount.publicKey,
+          dataAccount: dataAccountPubKey,
         })
         .rpc();
       await refreshBalance();
@@ -132,11 +128,11 @@ const useProgram = () => {
       await program.methods
         .clientCompleteCase()
         .accounts({
-          DA: dataAccount.publicKey,
+          DA: dataAccountPubKey,
           platform: platformPubKey,
           expert: expertPubKey,
           client: wallet.publicKey,
-          dataAccount: dataAccount.publicKey,
+          dataAccount: dataAccountPubKey,
         })
         .rpc();
       await refreshBalance();
@@ -146,7 +142,6 @@ const useProgram = () => {
   return {
     wallet,
     balances,
-    dataAccount,
     expertCreateCase,
     expertCancelCase,
     clientActivateCase,

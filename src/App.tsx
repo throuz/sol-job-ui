@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { useMemo } from "react";
+import { ToastContainer } from "react-toastify";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
   ConnectionProvider,
@@ -8,8 +8,8 @@ import {
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { UnsafeBurnerWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
+import Content from "./components/Content";
 import Header from "./components/Header";
-import ProgramPanel from "./components/ProgramPanel";
 import { GlobalProvider } from "./context/GlobalContext";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,18 +20,14 @@ function App() {
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
   const wallets = useMemo(() => [new UnsafeBurnerWalletAdapter()], []);
 
-  useEffect(() => {
-    toast("Please connect wallet");
-  }, []);
-
   return (
     <GlobalProvider>
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
-            <ToastContainer position="bottom-center" />
+            <ToastContainer position="bottom-center" limit={1} />
             <Header />
-            <ProgramPanel />
+            <Content />
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

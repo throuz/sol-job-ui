@@ -2,6 +2,7 @@ import { Dispatch } from "react";
 
 export enum EContractStatus {
   Nothing,
+  Connected,
   Created,
   Activated,
   Completed,

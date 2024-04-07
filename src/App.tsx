@@ -7,6 +7,7 @@ import {
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { UnsafeBurnerWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
+import Header from "./components/Header";
 import ProgramPanel from "./components/ProgramPanel";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import "./App.css";
@@ -20,6 +21,7 @@ function App() {
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
+          <Header />
           <ProgramPanel />
         </WalletModalProvider>
       </WalletProvider>

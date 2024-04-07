@@ -1,15 +1,17 @@
 import { useGlobalContext } from "../context/hooks";
-import { EContractStatus } from "../context/types";
+import { EStatus } from "../context/types";
 import Connected from "./contents/Connected";
+import Created from "./contents/Created";
 import Nothing from "./contents/Nothing";
 
 const Content = () => {
-  const { contractStatus } = useGlobalContext();
+  const { status } = useGlobalContext();
 
   return (
     <>
-      {contractStatus === EContractStatus.Nothing && <Nothing />}
-      {contractStatus === EContractStatus.Connected && <Connected />}
+      {status === EStatus.Nothing && <Nothing />}
+      {status === EStatus.Connected && <Connected />}
+      {status === EStatus.Created && <Created />}
     </>
   );
 };

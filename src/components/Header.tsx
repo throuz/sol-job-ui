@@ -5,7 +5,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 const Header = () => {
   return (
     <Container>
-      <img src={logo} />
+      <img src={logo} height={60} />
       <WalletMultiButton />
     </Container>
   );

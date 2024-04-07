@@ -1,11 +1,21 @@
 import { useMemo } from "react";
-import Swal from "sweetalert2";
 import { web3 } from "@coral-xyz/anchor";
 import * as anchor from "@coral-xyz/anchor";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import useAnchorProgram from "./useAnchorProgram";
 import useBalances from "./useBalances";
+
+export interface IExpertCreateCaseValues {
+  clientAddress: string;
+  caseAmount: number;
+  expertDeposit: number;
+  clientDeposit: number;
+}
+
+export interface IClientActivateCaseValues {
+  clientDeposit: number;
+}
 
 const useProgram = () => {
   const program = useAnchorProgram();
@@ -32,134 +42,104 @@ const useProgram = () => {
     clientPubKey,
   });
 
-  const caseAmount = 0.01;
-  const expertDeposit = 0.003;
-  const clientDeposit = 0.002;
-  const caseAmountLamports = new anchor.BN(caseAmount * SOL);
-  const expertDepositLamports = new anchor.BN(expertDeposit * SOL);
-  const clientDepositLamports = new anchor.BN(clientDeposit * SOL);
-
-  const expertCreateCase = async () => {
-    try {
-      if (program && wallet) {
-        await program.methods
-          .new(
-            clientPubKey,
-            caseAmountLamports,
-            expertDepositLamports,
-            clientDepositLamports
-          )
-          .accounts({
-            platform: platformPubKey,
-            dataAccount: dataAccount.publicKey,
-          })
-          .signers([dataAccount])
-          .rpc();
-        await refreshBalance();
-        await Swal.fire("Create success!");
-      }
-    } catch (error) {
-      await Swal.fire(String(error));
+  const expertCreateCase = async ({
+    clientAddress,
+    caseAmount,
+    expertDeposit,
+    clientDeposit,
+  }: IExpertCreateCaseValues) => {
+    if (program && wallet) {
+      await program.methods
+        .new(
+          new PublicKey(clientAddress),
+          new anchor.BN(caseAmount * SOL),
+          new anchor.BN(expertDeposit * SOL),
+          new anchor.BN(clientDeposit * SOL)
+        )
+        .accounts({
+          platform: platformPubKey,
+          dataAccount: dataAccount.publicKey,
+        })
+        .signers([dataAccount])
+        .rpc();
+      await refreshBalance();
     }
   };
 
   const expertCancelCase = async () => {
-    try {
-      if (program && wallet) {
-        await program.methods
-          .expertCancelCase()
-          .accounts({
-            DA: dataAccount.publicKey,
-            expert: wallet.publicKey,
-            dataAccount: dataAccount.publicKey,
-          })
-          .rpc();
-        await refreshBalance();
-        await Swal.fire("Cancel success!");
-      }
-    } catch (error) {
-      await Swal.fire(String(error));
+    if (program && wallet) {
+      await program.methods
+        .expertCancelCase()
+        .accounts({
+          DA: dataAccount.publicKey,
+          expert: wallet.publicKey,
+          dataAccount: dataAccount.publicKey,
+        })
+        .rpc();
+      await refreshBalance();
     }
   };
 
-  const clientActivateCase = async () => {
-    try {
-      if (program && wallet) {
-        await program.methods
-          .clientActivateCase(clientDepositLamports)
-          .accounts({
-            DA: dataAccount.publicKey,
-            platform: platformPubKey,
-            client: wallet.publicKey,
-            dataAccount: dataAccount.publicKey,
-          })
-          .rpc();
-        await refreshBalance();
-        await Swal.fire("Activate success!");
-      }
-    } catch (error) {
-      await Swal.fire(String(error));
+  const clientActivateCase = async ({
+    clientDeposit,
+  }: IClientActivateCaseValues) => {
+    if (program && wallet) {
+      await program.methods
+        .clientActivateCase(new anchor.BN(clientDeposit * SOL))
+        .accounts({
+          DA: dataAccount.publicKey,
+          platform: platformPubKey,
+          client: wallet.publicKey,
+          dataAccount: dataAccount.publicKey,
+        })
+        .rpc();
+      await refreshBalance();
     }
   };
 
   const platformForceCloseCaseForExpert = async () => {
-    try {
-      if (program && wallet) {
-        await program.methods
-          .platformForceCloseCaseForExpert()
-          .accounts({
-            DA: dataAccount.publicKey,
-            platform: platformPubKey,
-            expert: expertPubKey,
-            dataAccount: dataAccount.publicKey,
-          })
-          .rpc();
-        await refreshBalance();
-        await Swal.fire("Complete success!");
-      }
-    } catch (error) {
-      await Swal.fire(String(error));
+    if (program && wallet) {
+      await program.methods
+        .platformForceCloseCaseForExpert()
+        .accounts({
+          DA: dataAccount.publicKey,
+          platform: platformPubKey,
+          expert: expertPubKey,
+          dataAccount: dataAccount.publicKey,
+        })
+        .rpc();
+      await refreshBalance();
     }
   };
 
   const platformForceCloseCaseForClient = async () => {
-    try {
-      if (program && wallet) {
-        await program.methods
-          .platformForceCloseCaseForClient()
-          .accounts({
-            DA: dataAccount.publicKey,
-            platform: platformPubKey,
-            client: clientPubKey,
-            dataAccount: dataAccount.publicKey,
-          })
-          .rpc();
-        await refreshBalance();
-        await Swal.fire("Complete success!");
-      }
-    } catch (error) {
-      await Swal.fire(String(error));
+    if (program && wallet) {
+      await program.methods
+        .platformForceCloseCaseForClient()
+        .accounts({
+          DA: dataAccount.publicKey,
+          platform: platformPubKey,
+          client: clientPubKey,
+          dataAccount: dataAccount.publicKey,
+        })
+        .rpc();
+      await refreshBalance();
     }
   };
 
   const clientCompleteCase = async () => {
-    try {
-      if (program && wallet) {
-        await program.methods
-          .clientCompleteCase()
-          .accounts({
-            DA: dataAccount.publicKey,
-            platform: platformPubKey,
-            expert: expertPubKey,
-            client: wallet.publicKey,
-            dataAccount: dataAccount.publicKey,
-          })
-          .rpc();
-        await refreshBalance();
-        await Swal.fire("Complete success!");
-      }
-    } catch (error) {
-      await Swal.fire(String(error));
+    if (program && wallet) {
+      await program.methods
+        .clientCompleteCase()
+        .accounts({
+          DA: dataAccount.publicKey,
+          platform: platformPubKey,
+          expert: expertPubKey,
+          client: wallet.publicKey,
+          dataAccount: dataAccount.publicKey,
+        })
+        .rpc();
+      await refreshBalance();
     }
   };
 

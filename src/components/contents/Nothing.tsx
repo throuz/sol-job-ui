@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import Swal from "sweetalert2";
 import { useGlobalDispatchContext } from "../../context/hooks";
-import { EContractStatus } from "../../context/types";
+import { EStatus } from "../../context/types";
 
 const Nothing = () => {
   const wallet = useAnchorWallet();
@@ -24,8 +24,8 @@ const Nothing = () => {
     });
     if (result.isConfirmed) {
       globalDispatch({
-        type: "contractStatus",
-        contractStatus: EContractStatus.Connected,
+        type: "status",
+        value: EStatus.Connected,
       });
     }
   }, [globalDispatch]);

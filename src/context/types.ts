@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 
-export enum EContractStatus {
+export enum EStatus {
   Nothing,
   Connected,
   Created,
@@ -9,14 +9,57 @@ export enum EContractStatus {
 }
 
 export interface IGlobalContext {
-  contractStatus: EContractStatus;
+  status: EStatus;
+  platformAddress: string;
+  expertAddress: string;
+  clientAddress: string;
+  caseAmount: number;
+  expertDeposit: number;
+  clientDeposit: number;
 }
 
-interface IContractStatusAction {
-  type: "contractStatus";
-  contractStatus: EContractStatus;
+interface IStatusAction {
+  type: "status";
+  value: EStatus;
 }
 
-export type IGlobalContextAction = IContractStatusAction;
+interface IPlatformAddressAction {
+  type: "platformAddress";
+  value: string;
+}
+
+interface IExpertAddressAction {
+  type: "expertAddress";
+  value: string;
+}
+
+interface IClientAddressAction {
+  type: "clientAddress";
+  value: string;
+}
+
+interface ICaseAmountAction {
+  type: "caseAmount";
+  value: number;
+}
+
+interface IExpertDepositAction {
+  type: "expertDeposit";
+  value: number;
+}
+
+interface IClientDepositAction {
+  type: "clientDeposit";
+  value: number;
+}
+
+export type IGlobalContextAction =
+  | IStatusAction
+  | IPlatformAddressAction
+  | IExpertAddressAction
+  | IClientAddressAction
+  | ICaseAmountAction
+  | IExpertDepositAction
+  | IClientDepositAction;
 
 export type IGlobalDispatchContext = Dispatch<IGlobalContextAction>;

@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import useProgram, { IExpertCreateCaseValues } from "../../hooks/useProgram";
@@ -66,6 +66,7 @@ const initialState: IValues = {
 
 const Connected = () => {
   const [values, dispatch] = useReducer(reducer, initialState);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { expertCreateCase } = useProgram();
   const globalDispatch = useGlobalDispatchContext();
   const wallet = useAnchorWallet();
@@ -79,6 +80,7 @@ const Connected = () => {
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     try {
+      setIsSubmitting(true);
       e.preventDefault();
       const params: IExpertCreateCaseValues = {
         clientAddress: values.clientAddress,
@@ -103,8 +105,10 @@ const Connected = () => {
         value: Number(values.clientDeposit),
       });
       await Swal.fire("Create success!");
+      setIsSubmitting(false);
     } catch (error) {
       await Swal.fire(String(error));
+      setIsSubmitting(false);
     }
   };
 
@@ -169,7 +173,9 @@ const Connected = () => {
             }}
           />
         </InputContainer>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </button>
       </form>
     </Container>
   );

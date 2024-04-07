@@ -8241,9 +8241,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sol-job-ui@workspace:.":
+"solva-ui@workspace:.":
   version: 0.0.0-use.local
-  resolution: "sol-job-ui@workspace:."
+  resolution: "solva-ui@workspace:."
   dependencies:
     "@coral-xyz/anchor": "npm:^0.29.0"
     "@solana/wallet-adapter-base": "npm:^0.9.23"

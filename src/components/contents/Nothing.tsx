@@ -44,13 +44,17 @@ const Nothing = () => {
 
   return (
     <Container>
-      <button
-        onClick={async () => {
-          await whoYouAreSwal();
-        }}
-      >
-        Select who you are
-      </button>
+      {wallet ? (
+        <button
+          onClick={async () => {
+            await whoYouAreSwal();
+          }}
+        >
+          Select who you are
+        </button>
+      ) : (
+        <h1>Please connect wallet</h1>
+      )}
     </Container>
   );
 };
@@ -58,7 +62,7 @@ const Nothing = () => {
 export default Nothing;
 
 const Container = styled.div`
-  padding-top: 300px;
+  margin-top: 50%;
   display: flex;
   justify-content: center;
   align-items: center;

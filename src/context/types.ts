@@ -4,6 +4,7 @@ export enum EStatus {
   Nothing,
   Connected,
   Created,
+  PendingActivate,
   Activated,
   Completed,
 }

@@ -70,25 +70,18 @@ const Connected = () => {
   const { expertCreateCase } = useProgram();
   const globalDispatch = useGlobalDispatchContext();
   const wallet = useAnchorWallet();
-  console.log(values);
-
-  useEffect(() => {
-    toast.dismiss();
-    toast.clearWaitingQueue();
-    toast("Please fill and submit the form");
-  }, []);
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     try {
       setIsSubmitting(true);
       e.preventDefault();
-      const params: IExpertCreateCaseValues = {
-        clientAddress: values.clientAddress,
-        caseAmount: Number(values.caseAmount),
-        expertDeposit: Number(values.expertDeposit),
-        clientDeposit: Number(values.clientDeposit),
-      };
-      await expertCreateCase(params);
+      // const params: IExpertCreateCaseValues = {
+      //   clientAddress: values.clientAddress,
+      //   caseAmount: Number(values.caseAmount),
+      //   expertDeposit: Number(values.expertDeposit),
+      //   clientDeposit: Number(values.clientDeposit),
+      // };
+      // await expertCreateCase(params);
       globalDispatch({ type: "status", value: EStatus.Created });
       globalDispatch({
         type: "expertAddress",
@@ -111,6 +104,12 @@ const Connected = () => {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    toast.dismiss();
+    toast.clearWaitingQueue();
+    toast("Please fill and submit the form");
+  }, []);
 
   return (
     <Container>

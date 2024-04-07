@@ -45,6 +45,6 @@ const Created = () => {
 export default Created;
 
 const Container = styled.div`
-  margin-top: 50%;
+  margin-top: 15%;
   padding: 20px;
 `;

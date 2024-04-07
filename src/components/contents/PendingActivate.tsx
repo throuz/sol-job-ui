@@ -61,7 +61,7 @@ const Container = styled.div`
 `;
 
 const CaseItem = styled.div`
-  background: #512da8;
+  background: #5c1d9c;
   text-align: left;
   display: flex;
   justify-content: space-between;

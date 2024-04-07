@@ -62,7 +62,7 @@ const Nothing = () => {
 export default Nothing;
 
 const Container = styled.div`
-  margin-top: 50%;
+  margin-top: 15%;
   display: flex;
   justify-content: center;
   align-items: center;

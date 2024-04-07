@@ -25,7 +25,11 @@ function App() {
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
-            <ToastContainer position="bottom-center" limit={1} />
+            <ToastContainer
+              position="bottom-center"
+              limit={1}
+              style={{ fontSize: "20px" }}
+            />
             <Header />
             <Content />
           </WalletModalProvider>

@@ -24,9 +24,9 @@ const Activated = () => {
       <h1>Case List</h1>
       <CaseItem>
         <div>
-          <div>Expert: {expertAddress.slice(0, 12)}...</div>
+          <div>Talent: {expertAddress.slice(0, 12)}...</div>
           <div>Case Amount: {caseAmount} SOL</div>
-          <div>Expert Collateral: {expertDeposit} SOL</div>
+          <div>Talent Collateral: {expertDeposit} SOL</div>
           <div>Client Collateral: {clientDeposit} SOL</div>
         </div>
         <button

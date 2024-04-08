@@ -158,8 +158,8 @@ const CaseList = () => {
                 <div>Case Name: {name}</div>
                 <div>Status: {statusTextMap[status]}</div>
                 <div>Case Amount: {caseAmount} SOL</div>
-                <div>Expert: {expertAddress}</div>
-                <div>Expert Collateral: {expertDeposit} SOL</div>
+                <div>Talent: {expertAddress}</div>
+                <div>Talent Collateral: {expertDeposit} SOL</div>
                 <div>Client: {clientAddress}</div>
                 <div>Client Collateral: {clientDeposit} SOL</div>
               </div>

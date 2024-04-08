@@ -17,7 +17,7 @@ const SelectRole = () => {
       const result = await Swal.fire({
         title: "Who you are?",
         showDenyButton: true,
-        confirmButtonText: "Expert",
+        confirmButtonText: "Talent",
         confirmButtonColor: "#646cff",
         denyButtonText: "Client",
         denyButtonColor: "#646cff",

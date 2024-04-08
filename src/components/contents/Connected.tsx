@@ -150,7 +150,7 @@ const Connected = () => {
           />
         </InputContainer>
         <InputContainer>
-          <label htmlFor="expertDeposit">Expert Collateral</label>
+          <label htmlFor="expertDeposit">Talent Collateral</label>
           <Input
             type="number"
             id="expertDeposit"

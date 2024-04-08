@@ -20,19 +20,30 @@ const CaseList = () => {
   const navigate = useNavigate();
   const { clientActivateCase, clientCompleteCase } = useProgram();
 
-  const isExpert = useMemo(() => {
+  const walletAddress = useMemo(() => {
     if (wallet) {
-      return expertAddressList.includes(wallet.publicKey.toString());
+      return wallet.publicKey.toString();
     }
-    return false;
-  }, [expertAddressList, wallet]);
+    return "";
+  }, [wallet]);
+
+  const isExpert = useMemo(() => {
+    return expertAddressList.includes(walletAddress);
+  }, [expertAddressList, walletAddress]);
 
   const isClient = useMemo(() => {
-    if (wallet) {
-      return clientAddressList.includes(wallet.publicKey.toString());
+    return clientAddressList.includes(walletAddress);
+  }, [clientAddressList, walletAddress]);
+
+  const filteredCaseList = useMemo(() => {
+    if (isExpert) {
+      return caseList.filter((item) => item.expertAddress === walletAddress);
     }
-    return false;
-  }, [clientAddressList, wallet]);
+    if (isClient) {
+      return caseList.filter((item) => item.clientAddress === walletAddress);
+    }
+    return [];
+  }, [caseList, isClient, isExpert, walletAddress]);
 
   const onActivateClick = async ({
     dataAccountAddress,
@@ -85,21 +96,27 @@ const CaseList = () => {
   };
 
   useEffect(() => {
-    if (caseList.length === 0 && isExpert) {
+    if (filteredCaseList.length === 0 && isExpert) {
       toast.dismiss();
       toast.clearWaitingQueue();
       toast("Please create a case");
     }
-    if (caseList.length === 0 && isClient) {
+    if (filteredCaseList.length === 0 && isClient) {
       toast.dismiss();
       toast.clearWaitingQueue();
       toast("Please connect to talent wallet to create a case");
     }
-    if (caseList.length > 0) {
+    if (filteredCaseList.length > 0 && isExpert) {
       toast.dismiss();
       toast.clearWaitingQueue();
+      toast("Please connect to client wallet to change case status");
     }
-  }, [caseList.length, isClient, isExpert]);
+    if (filteredCaseList.length > 0 && isClient) {
+      toast.dismiss();
+      toast.clearWaitingQueue();
+      toast("Please activate or complete case");
+    }
+  }, [filteredCaseList.length, isClient, isExpert]);
 
   return (
     <Container>
@@ -110,8 +127,8 @@ const CaseList = () => {
       )}
       <h1>Case List</h1>
       <CaseItemListContainer>
-        {caseList.length === 0 && <h3>No case</h3>}
-        {caseList.map((item) => {
+        {filteredCaseList.length === 0 && <h3>No case</h3>}
+        {filteredCaseList.map((item) => {
           const {
             name,
             status,

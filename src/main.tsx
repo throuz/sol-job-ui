@@ -6,7 +6,7 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter basename="solva-ui">
+    <BrowserRouter basename="solva-ui/">
       <App />
     </BrowserRouter>
   </React.StrictMode>

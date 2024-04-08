@@ -23,9 +23,9 @@ const Home = () => {
         expertAddressList.includes(walletPubKey) ||
         clientAddressList.includes(walletPubKey)
       ) {
-        navigate("case-list");
+        navigate("/case-list");
       } else {
-        navigate("select-role");
+        navigate("/select-role");
       }
     }
   }, [clientAddressList, expertAddressList, navigate, wallet]);

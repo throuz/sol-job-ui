@@ -4,10 +4,12 @@ import styled from "styled-components";
 const NoMatch = () => {
   return (
     <Container>
-      <h2>Nothing to see here!</h2>
-      <p>
-        <Link to="/">Go to the home page</Link>
-      </p>
+      <div>
+        <h2>Nothing to see here!</h2>
+        <p>
+          <Link to="/">Go to the home page</Link>
+        </p>
+      </div>
     </Container>
   );
 };

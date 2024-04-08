@@ -7,6 +7,7 @@ export enum ECaseStatus {
 }
 
 export interface Case {
+  name: string;
   status: ECaseStatus;
   dataAccountAddress: string;
   platformAddress: string;
@@ -38,9 +39,16 @@ interface IAddCaseAction {
   value: Case;
 }
 
+interface IChangeCaseStatusAction {
+  type: "change_case_status";
+  dataAccountAddress: string;
+  status: ECaseStatus;
+}
+
 export type IStoreContextAction =
   | IAddExpertAddressListAction
   | IAddClientAddressListAction
-  | IAddCaseAction;
+  | IAddCaseAction
+  | IChangeCaseStatusAction;
 
 export type IStoreDispatchContext = Dispatch<IStoreContextAction>;

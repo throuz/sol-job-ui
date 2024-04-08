@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { useStoreDispatch } from "../store/hooks";
+import PrimaryButton from "../components/PrimaryButton";
 
 const SelectRole = () => {
   const storeDispatch = useStoreDispatch();
@@ -24,11 +25,11 @@ const SelectRole = () => {
       const walletPubKey = wallet.publicKey.toString();
       if (result.isConfirmed) {
         storeDispatch({ type: "add_expertAddressList", value: walletPubKey });
-        navigate("case-list");
+        navigate("/case-list");
       }
       if (result.isDenied) {
         storeDispatch({ type: "add_clientAddressList", value: walletPubKey });
-        navigate("case-list");
+        navigate("/case-list");
       }
     }
   };
@@ -41,13 +42,13 @@ const SelectRole = () => {
 
   return (
     <Container>
-      <button
+      <PrimaryButton
         onClick={async () => {
           await whoYouAreSwal();
         }}
       >
         Select who you are
-      </button>
+      </PrimaryButton>
     </Container>
   );
 };

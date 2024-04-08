@@ -39,6 +39,19 @@ const stateReducer = (state: IStoreContext, action: IStoreContextAction) => {
         caseList: [...state.caseList, action.value],
       };
     }
+    case "change_case_status": {
+      const newCaseList = [...state.caseList];
+      const foundIndex = newCaseList.findIndex(
+        (item) => item.dataAccountAddress === action.dataAccountAddress
+      );
+      if (foundIndex > -1) {
+        newCaseList[foundIndex].status = action.status;
+      }
+      return {
+        ...state,
+        caseList: [...newCaseList],
+      };
+    }
     default: {
       return state;
     }

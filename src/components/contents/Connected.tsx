@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
-import useProgram, { IExpertCreateCaseValues } from "../../hooks/useProgram";
+import useProgram, { IExpertCreateCaseParams } from "../../hooks/useProgram";
 import { useGlobalDispatchContext } from "../../store/hooks";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { EStatus } from "../../store/types";
@@ -77,7 +77,7 @@ const Connected = () => {
       setIsSubmitting(true);
       e.preventDefault();
       const dataAccount = web3.Keypair.generate();
-      const params: IExpertCreateCaseValues = {
+      const params: IExpertCreateCaseParams = {
         dataAccount,
         clientAddress: values.clientAddress,
         caseAmount: Number(values.caseAmount),

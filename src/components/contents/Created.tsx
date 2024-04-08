@@ -2,11 +2,8 @@ import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
-import {
-  useGlobalContext,
-  useGlobalDispatchContext,
-} from "../../context/hooks";
-import { EStatus } from "../../context/types";
+import { useGlobalContext, useGlobalDispatchContext } from "../../store/hooks";
+import { EStatus } from "../../store/types";
 import Swal from "sweetalert2";
 
 const Created = () => {

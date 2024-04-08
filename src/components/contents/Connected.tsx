@@ -2,9 +2,9 @@ import { useEffect, useReducer, useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import useProgram, { IExpertCreateCaseValues } from "../../hooks/useProgram";
-import { useGlobalDispatchContext } from "../../context/hooks";
+import { useGlobalDispatchContext } from "../../store/hooks";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { EStatus } from "../../context/types";
+import { EStatus } from "../../store/types";
 import Swal from "sweetalert2";
 import { web3 } from "@coral-xyz/anchor";
 

@@ -2,11 +2,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import {
-  useGlobalContext,
-  useGlobalDispatchContext,
-} from "../../context/hooks";
-import { EStatus } from "../../context/types";
+import { useGlobalContext, useGlobalDispatchContext } from "../../store/hooks";
+import { EStatus } from "../../store/types";
 import useProgram from "../../hooks/useProgram";
 
 const PendingActivate = () => {

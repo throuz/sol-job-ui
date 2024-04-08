@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import Swal from "sweetalert2";
-import { useGlobalDispatchContext } from "../../context/hooks";
-import { EStatus } from "../../context/types";
+import { useGlobalDispatchContext } from "../../store/hooks";
+import { EStatus } from "../../store/types";
 
 const Nothing = () => {
   const wallet = useAnchorWallet();

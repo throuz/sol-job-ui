@@ -9,13 +9,13 @@ import {
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { UnsafeBurnerWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
-import { GlobalProvider } from "./context/GlobalContext";
+import Layout from "./components/Layout";
+import { StoreProvider } from "./store/Store";
+import About from "./pages/About";
+import Home from "./pages/Home";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Layout from "./components/Layout";
-import About from "./pages/About";
-import Home from "./pages/Home";
 
 function NoMatch() {
   return (
@@ -34,7 +34,7 @@ function App() {
   const wallets = useMemo(() => [new UnsafeBurnerWalletAdapter()], []);
 
   return (
-    <GlobalProvider>
+    <StoreProvider>
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
@@ -53,7 +53,7 @@ function App() {
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>
-    </GlobalProvider>
+    </StoreProvider>
   );
 }
 

@@ -4,7 +4,7 @@ import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import useAnchorProgram from "./useAnchorProgram";
 import useBalances from "./useBalances";
-import { useGlobalContext } from "../context/hooks";
+import { useGlobalContext } from "../store/hooks";
 
 export interface IExpertCreateCaseValues {
   dataAccount: web3.Keypair;

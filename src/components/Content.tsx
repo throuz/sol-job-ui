@@ -1,5 +1,5 @@
-import { useGlobalContext } from "../context/hooks";
-import { EStatus } from "../context/types";
+import { useGlobalContext } from "../store/hooks";
+import { EStatus } from "../store/types";
 import Activated from "./contents/Activated";
 import Completed from "./contents/Completed";
 import Connected from "./contents/Connected";

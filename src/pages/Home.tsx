@@ -35,7 +35,7 @@ const Home = () => {
       <div>
         <h1>Welcome to Solva!</h1>
         <h2>
-          Solva links clients with skilled experts transparently and securely.
+          Solva links clients with skilled talents transparently and securely.
         </h2>
         <h3>Please connect your wallet to explore Solva.</h3>
       </div>

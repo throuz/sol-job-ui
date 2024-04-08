@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import Layout from "./components/Layout";
 import CaseList from "./pages/CaseList";
+import CreateCase from "./pages/CreateCase";
 import Home from "./pages/Home";
 import NoMatch from "./pages/NoMatch";
 import SelectRole from "./pages/SelectRole";
@@ -23,6 +24,7 @@ const AppRouter = () => {
         <Route index element={<Home />} />
         <Route path="/select-role" element={<SelectRole />} />
         <Route path="/case-list" element={<CaseList />} />
+        <Route path="/create-case" element={<CreateCase />} />
         <Route path="/*" element={<NoMatch />} />
       </Route>
     </Routes>

@@ -109,69 +109,70 @@ const CaseList = () => {
         </PrimaryButton>
       )}
       <h1>Case List</h1>
-      {caseList.length === 0 && <h3>No case</h3>}
-      {caseList.map((item) => {
-        const {
-          name,
-          status,
-          dataAccountAddress,
-          platformAddress,
-          expertAddress,
-          clientAddress,
-          caseAmount,
-          expertDeposit,
-          clientDeposit,
-        } = item;
-        const statusTextMap: Record<ECaseStatus, string> = {
-          [ECaseStatus.Created]: "Created",
-          [ECaseStatus.Activated]: "Activated",
-          [ECaseStatus.Completed]: "Closed",
-        };
-        const actionTextMap: Record<ECaseStatus, string> = {
-          [ECaseStatus.Created]: "Activate",
-          [ECaseStatus.Activated]: "Complete",
-          [ECaseStatus.Completed]: "Closed",
-        };
-        const isSubmitting = dataAccountAddress === caseInSubmitting;
-        const isClosed = status === ECaseStatus.Completed;
-        return (
-          <CaseItem>
-            <div>
-              <div>Case Name: {name}</div>
-              <div>Status: {statusTextMap[status]}</div>
-              <div>Case Amount: {caseAmount} SOL</div>
-              <div>Expert: {expertAddress}...</div>
-              <div>Expert Collateral: {expertDeposit} SOL</div>
-              <div>Client: {clientAddress}...</div>
-              <div>Client Collateral: {clientDeposit} SOL</div>
-            </div>
-            {isExpert && <button disabled>{statusTextMap[status]}</button>}
-            {isClient && (
-              <button
-                disabled={isSubmitting || isClosed}
-                onClick={async () => {
-                  if (status === ECaseStatus.Created) {
-                    await onActivateClick({
-                      dataAccountAddress,
-                      platformAddress,
-                      clientDeposit,
-                    });
-                  }
-                  if (status === ECaseStatus.Activated) {
-                    await onCompleteClick({
-                      dataAccountAddress,
-                      platformAddress,
-                      expertAddress,
-                    });
-                  }
-                }}
-              >
-                {isSubmitting ? "Submitting..." : actionTextMap[status]}
-              </button>
-            )}
-          </CaseItem>
-        );
-      })}
+      <CaseItemListContainer>
+        {caseList.length === 0 && <h3>No case</h3>}
+        {caseList.map((item) => {
+          const {
+            name,
+            status,
+            dataAccountAddress,
+            platformAddress,
+            expertAddress,
+            clientAddress,
+            caseAmount,
+            expertDeposit,
+            clientDeposit,
+          } = item;
+          const statusTextMap: Record<ECaseStatus, string> = {
+            [ECaseStatus.Created]: "Created",
+            [ECaseStatus.Activated]: "Activated",
+            [ECaseStatus.Completed]: "Closed",
+          };
+          const actionTextMap: Record<ECaseStatus, string> = {
+            [ECaseStatus.Created]: "Activate",
+            [ECaseStatus.Activated]: "Complete",
+            [ECaseStatus.Completed]: "Closed",
+          };
+          const isSubmitting = dataAccountAddress === caseInSubmitting;
+          const isClosed = status === ECaseStatus.Completed;
+          return (
+            <CaseItem>
+              <div>
+                <div>Case Name: {name}</div>
+                <div>Status: {statusTextMap[status]}</div>
+                <div>Case Amount: {caseAmount} SOL</div>
+                <div>Expert: {expertAddress}</div>
+                <div>Expert Collateral: {expertDeposit} SOL</div>
+                <div>Client: {clientAddress}</div>
+                <div>Client Collateral: {clientDeposit} SOL</div>
+              </div>
+              {isClient && (
+                <PrimaryButton
+                  disabled={isSubmitting || isClosed}
+                  onClick={async () => {
+                    if (status === ECaseStatus.Created) {
+                      await onActivateClick({
+                        dataAccountAddress,
+                        platformAddress,
+                        clientDeposit,
+                      });
+                    }
+                    if (status === ECaseStatus.Activated) {
+                      await onCompleteClick({
+                        dataAccountAddress,
+                        platformAddress,
+                        expertAddress,
+                      });
+                    }
+                  }}
+                >
+                  {isSubmitting ? "Submitting..." : actionTextMap[status]}
+                </PrimaryButton>
+              )}
+            </CaseItem>
+          );
+        })}
+      </CaseItemListContainer>
     </Container>
   );
 };
@@ -182,13 +183,21 @@ const Container = styled.div`
   padding-top: 30px;
 `;
 
+const CaseItemListContainer = styled.div`
+  margin: 0 auto;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
 const CaseItem = styled.div`
   background: #5c1d9c;
   text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   button {
     font-size: 20px;

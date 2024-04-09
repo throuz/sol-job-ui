@@ -9,6 +9,7 @@ import useProgram, { IExpertCreateCaseParams } from "../hooks/useProgram";
 import { useStoreDispatch } from "../store/hooks";
 import { ECaseStatus } from "../store/types";
 import { useNavigate } from "react-router-dom";
+import CancelButton from "../components/CancelButton";
 
 interface IValues {
   name: string;
@@ -100,6 +101,18 @@ const CreateCase = () => {
           />
         </InputContainer>
         <InputContainer>
+          <label htmlFor="clientAddress">Client Address</label>
+          <Input
+            type="text"
+            id="clientAddress"
+            name="clientAddress"
+            value={values.clientAddress}
+            onChange={(e) => {
+              dispatch({ key: "clientAddress", value: e.currentTarget.value });
+            }}
+          />
+        </InputContainer>
+        <InputContainer>
           <label htmlFor="caseAmount">Case Amount</label>
           <Input
             type="number"
@@ -130,18 +143,6 @@ const CreateCase = () => {
           />
         </InputContainer>
         <InputContainer>
-          <label htmlFor="clientAddress">Client Address</label>
-          <Input
-            type="text"
-            id="clientAddress"
-            name="clientAddress"
-            value={values.clientAddress}
-            onChange={(e) => {
-              dispatch({ key: "clientAddress", value: e.currentTarget.value });
-            }}
-          />
-        </InputContainer>
-        <InputContainer>
           <label htmlFor="clientDeposit">Client Collateral</label>
           <Input
             type="number"
@@ -156,9 +157,14 @@ const CreateCase = () => {
             }}
           />
         </InputContainer>
-        <PrimaryButton type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Submit"}
-        </PrimaryButton>
+        <ButtonsContainer>
+          <CancelButton onClick={() => navigate("/case-list")}>
+            Cancel
+          </CancelButton>
+          <PrimaryButton type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </PrimaryButton>
+        </ButtonsContainer>
       </Form>
     </Container>
   );
@@ -188,4 +194,10 @@ const Input = styled.input`
   font-size: 20px;
   padding: 5px 10px;
   box-sizing: border-box;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 `;

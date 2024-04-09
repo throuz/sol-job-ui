@@ -25,7 +25,7 @@ const App = () => {
         <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
             <ToastContainer
-              position="bottom-center"
+              position="top-center"
               limit={1}
               style={{ fontSize: "20px" }}
             />

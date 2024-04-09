@@ -120,11 +120,6 @@ const CaseList = () => {
 
   return (
     <Container>
-      {isExpert && (
-        <PrimaryButton onClick={() => navigate("/create-case")}>
-          Create Case
-        </PrimaryButton>
-      )}
       <h1>Case List</h1>
       <CaseItemListContainer>
         {filteredCaseList.length === 0 && <h3>No case</h3>}
@@ -189,6 +184,13 @@ const CaseList = () => {
             </CaseItem>
           );
         })}
+        {isExpert && (
+          <ButtonContainer>
+            <PrimaryButton onClick={() => navigate("/create-case")}>
+              Create Case
+            </PrimaryButton>
+          </ButtonContainer>
+        )}
       </CaseItemListContainer>
     </Container>
   );
@@ -209,14 +211,21 @@ const CaseItemListContainer = styled.div`
 `;
 
 const CaseItem = styled.div`
-  background: #5c1d9c;
+  background: #ead6ff;
+  color: #040007;
   text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 40px;
   border-radius: 10px;
   button {
     font-size: 20px;
   }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

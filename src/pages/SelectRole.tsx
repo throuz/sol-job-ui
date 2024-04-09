@@ -42,13 +42,19 @@ const SelectRole = () => {
 
   return (
     <Container>
-      <PrimaryButton
-        onClick={async () => {
-          await whoYouAreSwal();
-        }}
-      >
-        Select who you are
-      </PrimaryButton>
+      <div>
+        <h1>Welcome to Solva!</h1>
+        <h2>
+          Solva links clients with skilled talents transparently and securely.
+        </h2>
+        <PrimaryButton
+          onClick={async () => {
+            await whoYouAreSwal();
+          }}
+        >
+          Select who you are
+        </PrimaryButton>
+      </div>
     </Container>
   );
 };
@@ -60,4 +66,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  h2 {
+    margin-bottom: 30px;
+  }
 `;

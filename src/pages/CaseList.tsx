@@ -138,12 +138,12 @@ const CaseList = () => {
           const statusTextMap: Record<ECaseStatus, string> = {
             [ECaseStatus.Created]: "Created",
             [ECaseStatus.Activated]: "Activated",
-            [ECaseStatus.Completed]: "Closed",
+            [ECaseStatus.Completed]: "Completed",
           };
           const actionTextMap: Record<ECaseStatus, string> = {
             [ECaseStatus.Created]: "Activate",
             [ECaseStatus.Activated]: "Complete",
-            [ECaseStatus.Completed]: "Closed",
+            [ECaseStatus.Completed]: "",
           };
           const isSubmitting = dataAccountAddress === caseInSubmitting;
           const isClosed = status === ECaseStatus.Completed;
@@ -158,7 +158,7 @@ const CaseList = () => {
                 <div>Client: {clientAddress}</div>
                 <div>Client Collateral: {clientDeposit} SOL</div>
               </div>
-              {isClient && (
+              {isClient && !isClosed && (
                 <PrimaryButton
                   disabled={isSubmitting || isClosed}
                   onClick={async () => {
